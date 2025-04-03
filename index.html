@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gift.hero | Discord Server</title>
+    <link rel="icon" href="https://discord.com/assets/847541504914fd33810e70a0ea73177e.ico" type="image/x-icon">
+    <style>
+        :root {
+            --primary: #5865F2;
+            --primary-dark: #4752C4;
+            --background: #1e1e2e;
+            --card: #2a2a3a;
+            --text: #ffffff;
+            --text-muted: #b8b8b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Whitney', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(88, 101, 242, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(88, 101, 242, 0.15) 0%, transparent 50%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            width: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #5865F2, #EB459E);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #5865F2, #EB459E);
+            border-radius: 3px;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .invite-card {
+            background-color: var(--card);
+            border-radius: 12px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin-bottom: 2rem;
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .invite-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .server-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 5px solid var(--primary);
+            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.3);
+        }
+
+        .server-name {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .server-description {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .member-count {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+
+        .online-indicator {
+            width: 10px;
+            height: 10px;
+            background-color: #3BA55C;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .invite-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .invite-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .invite-button:active {
+            transform: translateY(0);
+        }
+
+        .discord-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .feature {
+            background-color: var(--card);
+            padding: 1.5rem;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .feature-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .invite-card {
+                padding: 1.5rem;
+            }
+            
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">gift.hero</h1>
+            <p class="tagline">Join our vibrant Discord community for amazing giveaways, events, and friendly chats!</p>
+        </header>
+
+        <div class="invite-card">
+            <img src="https://cdn.discordapp.com/icons/123456789012345678/a_12345678901234567890123456789012.webp?size=256" alt="Server Icon" class="server-icon" id="server-icon">
+            <h2 class="server-name">gift.hero Community</h2>
+            <p class="server-description">A place where we host regular giveaways, gaming events, and community activities. Everyone is welcome!</p>
+            
+            <div class="member-count">
+                <span class="online-indicator"></span>
+                <span id="member-count">1,234</span> members online
+            </div>
+            
+            <button class="invite-button" onclick="window.location.href='https://discord.gg/your-invite-code'">
+                <svg class="discord-icon" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M22,12C22,6.477 17.523,2 12,2C6.477,2 2,6.477 2,12C2,16.991 5.657,21.128 10.438,21.878V15.891H7.898V12H10.438V9.797C10.438,7.291 11.93,5.907 14.215,5.907C15.309,5.907 16.453,6.102 16.453,6.102V9.562H15.193C13.95,9.562 13.563,10.333 13.563,11.124V12H16.336L15.893,15.891H13.563V21.878C18.343,21.128 22,16.991 22,12Z"></path>
+                </svg>
+                Join Our Server
+            </button>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🎁</div>
+                <h3 class="feature-title">Regular Giveaways</h3>
+                <p class="feature-desc">We host weekly giveaways with awesome prizes for our community members.</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">🎮</div>
+                <h3 class="feature-title">Gaming Events</h3>
+                <p class="feature-desc">Join our gaming tournaments and community game nights with special rewards.</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">💬</div>
+                <h3 class="feature-title">Active Community</h3>
+                <p class="feature-desc">Friendly chats, helpful members, and dedicated staff to make your experience great.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2023 gift.hero | Not affiliated with Discord Inc.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        });
+        
+        setTimeout(() => {
+            document.getElementById('member-count').textContent = '1,542';
+        }, 2000);
+    </script>
+</body>
+</html>
