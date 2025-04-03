@@ -253,8 +253,13 @@
                 flex-direction: column;
                 align-items: center;
             }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
         }
-    </style>
+    </style>  
 </head>
 <body>
     <div class="container">
@@ -277,7 +282,46 @@
                 Join Our Server
             </button>
         </div>
+      <script>
+       const SERVER_ID = 'YOUR_SERVER_ID'; // REPLACE WITH YOUR SERVER ID
+        
+        async function updateMemberCount() {
+            try {
+                const response = await fetch(`https://discord.com/api/guilds/${SERVER_ID}/widget.json`);
+                if (!response.ok) throw new Error('Failed to fetch');
+                
+                const data = await response.json();
+                const onlineCount = data.presence_count;
+                
+                // Animate the change
+                const counter = document.getElementById('member-count');
+                counter.style.transform = 'scale(1.1)';
+                counter.style.color = '#3ba55c';
+                
+                setTimeout(() => {
+                    counter.textContent = onlineCount.toLocaleString();
+                    counter.style.transform = 'scale(1)';
+                    counter.style.color = '';
+                }, 300);
+                
+            } catch (error) {
+                console.error('Error updating member count:', error);
+                document.getElementById('member-count').textContent = 'Many';
+            }
+        }
 
+        // Initial load and update every 60 seconds
+        document.addEventListener('DOMContentLoaded', () => {
+            updateMemberCount();
+            setInterval(updateMemberCount, 60000);
+            
+            // Add pulse animation to indicator
+            const indicator = document.querySelector('.online-indicator');
+            setInterval(() => {
+                indicator.style.animation = 'pulse 1.5s infinite';
+            }, 100);
+        });
+      </script>
         <div class="features">
             <div class="feature">
                 <div class="feature-icon">🎁</div>
